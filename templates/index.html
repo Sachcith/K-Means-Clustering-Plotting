@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>MFC 4 Assignment 2</title>
+{% endblock %}
+
+
+{% block body %}
+    <table class="before">
+        <tr>
+            <td>
+                <h1>Plot for K-Means clustering</h1>
+                <h2>MFC 4 Assignment 2</h2>
+                <h2>Sachcith G N</h2>
+                <h2>CB.SC.U4AIE24251</h2>
+            </td>
+        </tr>
+        <tr>
+            <td><button onclick="hide()">Click Here To Open</button></td>
+        </tr>
+    </table>
+    <table class="after hidden top">
+        <tr>
+            <td>
+                <h1>1D Conv Visualization</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="input-container">
+
+                    <input id="Input_1" type="text" placeholder="Enter first Input" value="{{ INPUT1 }}">
+
+                    <input id="Input_2" type="text" placeholder="Enter second Input" value="{{ INPUT2 }}">
+
+                    <input id="Input_3" type="text" placeholder="Enter K" value="{{ INPUT3 }}">
+
+                    <div class="button-row">
+                        <button id="Random">Random</button>
+                        <button id="Plot">Plot</button>
+                        <a href="" download="plot.png" id="aDownload"><button id="Download">Download</button></a>
+                        <button id="Reset">Reset</button>
+                        <button onclick="unhide()">Close</button>
+                    </div>
+
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <table class="after hidden" id="output">
+        <tr>
+            <td>
+                <center>
+                    <img id="plot_image" style="margin-top:200px" height="40%">
+                </center>
+            </td>
+        </tr>
+    </table>
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
+
+<script>
+    const socket = io();
+    const Input_1 = document.getElementById("Input_1");
+    const Input_2 = document.getElementById("Input_2");
+
+    document.getElementById("Random").addEventListener("click",() => {
+        const data = {
+            type : "random",
+            input1 : Input_1.value,
+            input2 : Input_2.value,
+            input3 : Input_3.value,
+        }
+        socket.emit("random",data);
+    });
+    
+    document.getElementById("Reset").addEventListener("click",() => {
+        const data = {
+            type : "reset",
+            input1 : Input_1.value,
+            input2 : Input_2.value,
+            input3 : Input_3.value,
+        }
+        socket.emit("reset",data);
+    });
+    
+    document.getElementById("Plot").addEventListener("click",() => {
+        const data = {
+            type : "plot",
+            input1 : Input_1.value,
+            input2 : Input_2.value,
+            input3 : Input_3.value
+        }
+        socket.emit("plot",data);
+    });
+
+    socket.on("reset",(data)=>{
+        console.log("Reset!")
+        document.getElementById("Input_1").value="";
+        document.getElementById("Input_2").value="";
+        document.getElementById("Input_3").value="";
+        document.getElementById("plot_image").src="";
+    });
+
+    socket.on("value",(data)=>{
+        document.getElementById("Input_1").value = data.input1;
+        document.getElementById("Input_2").value = data.input2;
+        document.getElementById("Input_3").value = data.input3;
+    });
+
+    socket.on("plot",(data)=>{
+        const newImg = `${data.src}?t=${Date.now()}`;
+        document.getElementById("plot_image").src = "";
+        document.getElementById("plot_image").src = newImg;
+        document.getElementById("aDownload").href = data.src;
+    });
+
+    function hide(){
+        document.querySelectorAll(".before").forEach(element => element.classList.add("hidden"));
+        document.querySelectorAll(".after").forEach(element=>element.classList.remove("hidden"));
+        socket.emit("output");
+    }
+    function unhide(){
+        document.querySelectorAll(".before").forEach(element => element.classList.remove("hidden"));
+        document.querySelectorAll(".after").forEach(element=>element.classList.add("hidden"));
+    }
+
+
+</script>
+
+{% endblock %}

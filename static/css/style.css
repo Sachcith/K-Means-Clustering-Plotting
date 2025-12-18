@@ -1,0 +1,154 @@
+/* ---------- Global Dark Layout ---------- */
+body {
+    margin: 0;
+    padding: 0;
+    background: #0e0e0f;              /* pure minimal dark */
+    color: #e5e5e5;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container table */
+table {
+    border-collapse: collapse;
+    text-align: center;
+}
+
+/* Titles */
+h1 {
+    font-size: 1.9rem;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+h2 {
+    margin-bottom: 26px;
+    color: #9aa0a6;
+    font-weight: 400;
+}
+
+/* Clean anchor */
+a {
+    text-decoration: none;
+}
+
+/* Buttons */
+button {
+    padding: 12px 28px;
+    font-size: 1.05rem;
+    color: #ffffff;
+    background: #1a1b1e;                      /* minimal dark button */
+    border: 1px solid #2b2d31;                /* thin outline */
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 12px;
+    transition: all 0.25s ease;
+}
+
+/* Hover effects */
+button:hover {
+    background: #2d2f33;                      /* subtle lightening */
+    border-color: #3b3e45;
+    transform: translateY(-2px);              /* slight lift */
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);  /* minimal glow */
+}
+
+/* Click animation */
+button:active {
+    transform: translateY(0px) scale(0.97);
+    box-shadow: none;
+}
+
+/* Center td content properly */
+td {
+    text-align: center;
+    padding: 6px;
+}
+
+input[type="text"] {
+    width: 320px;
+    padding: 12px 14px;
+    font-size: 1rem;
+    background: #131314;             /* dark input background */
+    border: 1px solid #2a2c2f;       /* thin outline */
+    border-radius: 6px;
+    color: #ffffff;
+    outline: none;
+    transition: all 0.25s ease;
+}
+
+/* Hover + Focus */
+input[type="text"]:hover,
+input[type="text"]:focus {
+    background: #1a1b1e;
+    border-color: #3d4045;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.06);
+}
+
+.top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;           /* full page width */
+    background: #0e0e0f;
+    z-index: 10;
+    padding: 20px 0; 
+}
+
+/* Output table styling */
+
+/* Add spacing between cells */
+#output table {
+    border-collapse: separate !important;
+    border-spacing: 4px;      /* space between cells */
+}
+
+/* Cells */
+#output td {
+    width: 60px;                 /* bigger cells for visualization */
+    min-width: 60px;
+    padding: 12px;
+    margin: 4px;                 /* spacing between cells */
+    border: 1px solid #2b2d31;   /* subtle grid lines */
+    background-color: #131314;    /* dark cell background */
+    color: #000000;               /* text color inside cell */
+    font-size: 1.2rem;            /* slightly bigger font */
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 6px;           /* rounder like buttons */
+    transition: all 0.25s ease;   /* smooth color change for animations */
+}
+
+/* Hover effect for output table cells */
+#output td:hover {
+    background-color: #000000;            /* slightly lighter dark */
+    border-color: #3a3c40;                /* subtle border highlight */
+    transform: translateY(-2px);          /* small lift like buttons */
+    box-shadow: 0 0 10px rgba(255,255,255,0.08);  /* soft white glow */
+    cursor: pointer;
+}
+
+
+/* Highlighted states during animation 
+
+#output td.active {
+    background-color: #4caf50;
+    color: #fff;
+}
+
+#output td.circular {
+    background-color: #ff9800;
+    color: #fff;
+}
+
+#output td.zero {
+    background-color: #1a1b1e;
+    color: #fff;
+}
+
+*/
